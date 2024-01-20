@@ -8,7 +8,32 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-        <Button x:Name="myButton" Click="myButton_Click">Click Me</Button>
-    </StackPanel>
+    <Grid x:Name="mainGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.Resources>
+            <Storyboard x:Name="moveStoryboard">
+                <DoubleAnimationUsingKeyFrames
+                    Storyboard.TargetName="movingImage"
+                    Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)"
+                    Duration="0:0:6" EnableDependentAnimation="True">
+                    <LinearDoubleKeyFrame Value="-300" KeyTime="0:0:3" />
+                    <LinearDoubleKeyFrame Value="0" KeyTime="0:0:6" />
+                </DoubleAnimationUsingKeyFrames>
+
+                <DoubleAnimationUsingKeyFrames
+                Storyboard.TargetName="movingImage"
+                Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)"
+                Duration="0:0:6" EnableDependentAnimation="True">
+                    <LinearDoubleKeyFrame Value="-300" KeyTime="0:0:3" />
+                    <LinearDoubleKeyFrame Value="0" KeyTime="0:0:6" />
+                </DoubleAnimationUsingKeyFrames>
+                
+            </Storyboard>
+        </Grid.Resources>
+        <Image x:Name="movingImage" Width="50" Height="50">
+            <Image.Source>
+                <BitmapImage
+                             UriSource="Assets/wozek.gif"/>
+            </Image.Source>
+        </Image>
+    </Grid>
 </Window>

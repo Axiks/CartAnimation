@@ -26,11 +26,10 @@ namespace CartAnimation
         public MainWindow()
         {
             this.InitializeComponent();
+
+            movingImage.RenderTransform = new CompositeTransform();
+            moveStoryboard.Begin();
         }
 
-        private void myButton_Click(object sender, RoutedEventArgs e)
-        {
-            myButton.Content = "Clicked";
-        }
     }
 }
