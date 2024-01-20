@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="CartAnimation.CardAnimationPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CartAnimation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Grid x:Name="mainGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+                <Grid.Resources>
+                    <Storyboard x:Name="moveStoryboard">
+                        <DoubleAnimation
+                    Storyboard.TargetName="movingImage"
+                    Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)"
+                    From="0" To="-300" Duration="0:0:0" />
+                        <DoubleAnimation
+                    Storyboard.TargetName="movingImage"
+                    Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)"
+                    From="0" To="-300" Duration="0:0:0" />
+                    </Storyboard>
+                    <Storyboard x:Name="reverseStoryboard">
+                        <DoubleAnimation
+                    Storyboard.TargetName="movingImage"
+                    Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)"
+                    From="-300" To="0" Duration="0:0:0" />
+                        <DoubleAnimation
+                    Storyboard.TargetName="movingImage"
+                    Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)"
+                    From="-300" To="0" Duration="0:0:0" />
+                    </Storyboard>
+                </Grid.Resources>
+                <Image x:Name="movingImage" Width="50" Height="50">
+                    <Image.Source>
+                        <BitmapImage UriSource="Assets/wozek.gif"/>
+                    </Image.Source>
+                </Image>
+            </Grid>
+            <Button x:Name="Accident" Click="AccidentBtnClick">Accident</Button>
+        </StackPanel>
+    </Grid>
+</Page>
