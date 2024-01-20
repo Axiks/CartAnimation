@@ -47,10 +47,18 @@ namespace CartAnimation
             if (IsForwardDirection)
             {
                 moveStoryboard.Begin();
+                moveStoryboard.Completed += (s, e) =>
+                {
+                    reverseStoryboard.Begin();
+                };
             }
             else
             {
                 reverseStoryboard.Begin();
+                reverseStoryboard.Completed += (s, e) =>
+                {
+                    moveStoryboard.Begin();
+                };
             }
         }
 
