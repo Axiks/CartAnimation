@@ -13,6 +13,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using System.Configuration;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -24,22 +25,25 @@ namespace CartAnimation
     /// </summary>
     public sealed partial class CardAnimationPage : Page
     {
+        private bool IsMove = false;
+        private bool IsForwardDirection;
+
+        private Duration animationDuration;
+
         public CardAnimationPage()
         {
             this.InitializeComponent();
 
+            IsForwardDirection = bool.Parse(ConfigurationManager.AppSettings["animation_is_forward_direction"]);
+            var AnimationDuration = int.Parse(ConfigurationManager.AppSettings["animation_duration"]);
+            animationDuration = new Duration(TimeSpan.FromSeconds(AnimationDuration));
+
             movingImage.RenderTransform = new CompositeTransform();
-            SetMoveTime();
-
-            StartAnimation();
         }
-
-        private bool IsMove = true;
-        private bool IsForwardDirection = false;
-        private int TimeOfTravel = 4;
 
         private void StartAnimation()
         {
+            IsMove = true;
             if (IsForwardDirection)
             {
                 moveStoryboard.Begin();
@@ -50,51 +54,31 @@ namespace CartAnimation
             }
         }
 
-        private void AccidentBtnClick(object sender, RoutedEventArgs e)
+        private void MoveBtn_Click(object sender, RoutedEventArgs e) => StartAnimation();
+
+        private void AccidentBtn_Click(object sender, RoutedEventArgs e)
         {
             if (IsMove)
             {
-                Pause();
+                PauseAnimation();
             }
             else
             {
-                Resume();
+                ResumeAnimation();
             }
             IsMove = !IsMove;
         }
 
-        private void Resume()
+        private void ResumeAnimation()
         {
             moveStoryboard.Resume();
             reverseStoryboard.Resume();
         }
 
-        private void Pause()
+        private void PauseAnimation()
         {
             moveStoryboard.Pause();
             reverseStoryboard.Pause();
-        }
-
-        private void SetMoveTime()
-        {
-            foreach (var timeline in moveStoryboard.Children)
-            {
-                if (timeline is DoubleAnimation)
-                {
-                    DoubleAnimation yourDoubleAnimation = timeline as DoubleAnimation;
-                    var timeSpan = TimeSpan.FromSeconds(TimeOfTravel);
-                    yourDoubleAnimation.Duration = new Duration(timeSpan);
-                }
-            }
-            foreach (var timeline in reverseStoryboard.Children)
-            {
-                if (timeline is DoubleAnimation)
-                {
-                    DoubleAnimation yourDoubleAnimation = timeline as DoubleAnimation;
-                    var timeSpan = TimeSpan.FromSeconds(TimeOfTravel);
-                    yourDoubleAnimation.Duration = new Duration(timeSpan);
-                }
-            }
         }
     }
 }
