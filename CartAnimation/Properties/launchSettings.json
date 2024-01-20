@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "CartAnimation (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "CartAnimation (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
