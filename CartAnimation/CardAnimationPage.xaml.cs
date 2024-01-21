@@ -25,6 +25,7 @@ namespace CartAnimation
     /// </summary>
     public sealed partial class CardAnimationPage : Page
     {
+        private CompositeTransform _compositeTransform;
         private bool IsMove = false;
         private bool IsForwardDirection;
 
@@ -38,7 +39,9 @@ namespace CartAnimation
             var AnimationDuration = int.Parse(ConfigurationManager.AppSettings["animation_duration"]);
             animationDuration = new Duration(TimeSpan.FromSeconds(AnimationDuration));
 
-            movingImage.RenderTransform = new CompositeTransform();
+            _compositeTransform = new CompositeTransform();
+            InitStartPosition(150, 150);
+            movingImage.RenderTransform = _compositeTransform;
         }
 
         private void StartAnimation()
@@ -87,6 +90,20 @@ namespace CartAnimation
         {
             moveStoryboard.Pause();
             reverseStoryboard.Pause();
+        }
+
+        private void InitStartPosition(int x, int y)
+        {
+            if (IsForwardDirection)
+            {
+                _compositeTransform.TranslateX = x;
+                _compositeTransform.TranslateY = y;
+            }
+            else
+            {
+                _compositeTransform.TranslateX = -x;
+                _compositeTransform.TranslateY = -y;
+            }
         }
     }
 }

@@ -10,37 +10,39 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <StackPanel VerticalAlignment="Bottom"   HorizontalAlignment="Center">
-            <Grid x:Name="mainGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-                <Grid.Resources>
-                    <Storyboard x:Name="moveStoryboard">
-                        <DoubleAnimation
-                        Storyboard.TargetName="movingImage"
-                        Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)"
-                        From="0" To="-300" Duration="{x:Bind animationDuration}" />
-                        <DoubleAnimation
-                        Storyboard.TargetName="movingImage"
-                        Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)"
-                        From="0" To="-300" Duration="{x:Bind animationDuration}" />
-                    </Storyboard>
-                    <Storyboard x:Name="reverseStoryboard">
-                        <DoubleAnimation
-                        Storyboard.TargetName="movingImage"
-                        Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)"
-                        From="-300" To="0" Duration="{x:Bind animationDuration}" />
-                        <DoubleAnimation
-                        Storyboard.TargetName="movingImage"
-                        Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)"
-                        From="-300" To="0" Duration="{x:Bind animationDuration}" />
-                    </Storyboard>
-                </Grid.Resources>
-                <Image x:Name="movingImage" Width="50" Height="50">
-                    <Image.Source>
-                        <BitmapImage UriSource="Assets/wozek.gif"/>
-                    </Image.Source>
-                </Image>
-            </Grid>
-            <StackPanel Orientation="Horizontal" Margin="25">
+        <StackPanel VerticalAlignment="Center"  HorizontalAlignment="Center">
+            <Border BorderThickness="1,1,1,1" CornerRadius="10">
+                <Grid x:Name="mainGrid" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Width="380" Height="380">
+                    <Grid.Resources>
+                        <Storyboard x:Name="moveStoryboard">
+                            <DoubleAnimation
+                            Storyboard.TargetName="movingImage"
+                            Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)"
+                            From="150" To="-150" Duration="{x:Bind animationDuration}" />
+                            <DoubleAnimation
+                            Storyboard.TargetName="movingImage"
+                            Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)"
+                            From="150" To="-150" Duration="{x:Bind animationDuration}" />
+                        </Storyboard>
+                        <Storyboard x:Name="reverseStoryboard">
+                            <DoubleAnimation
+                            Storyboard.TargetName="movingImage"
+                            Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)"
+                            From="-150" To="150" Duration="{x:Bind animationDuration}" />
+                            <DoubleAnimation
+                            Storyboard.TargetName="movingImage"
+                            Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)"
+                            From="-150" To="150" Duration="{x:Bind animationDuration}" />
+                        </Storyboard>
+                    </Grid.Resources>
+                    <Image x:Name="movingImage" Width="50" Height="50">
+                        <Image.Source>
+                            <BitmapImage UriSource="Assets/wozek.gif"/>
+                        </Image.Source>
+                    </Image>
+                </Grid>
+            </Border>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="25">
                 <Button x:Name="Move" Click="MoveBtn_Click">Move</Button>
                 <Button x:Name="Accident" Click="AccidentBtn_Click" Margin="10,0,0,0" Background="IndianRed">Accident</Button>
             </StackPanel>
