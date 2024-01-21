@@ -39,6 +39,9 @@
                         <Image.Source>
                             <BitmapImage UriSource="Assets/wozek.gif"/>
                         </Image.Source>
+                        <Image.RenderTransform>
+                            <CompositeTransform TranslateX="{x:Bind startPositionX}" TranslateY="{x:Bind startPositionY}"></CompositeTransform>
+                        </Image.RenderTransform>
                     </Image>
                 </Grid>
             </Border>
